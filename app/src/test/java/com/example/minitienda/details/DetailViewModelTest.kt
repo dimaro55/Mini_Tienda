@@ -4,8 +4,9 @@ import app.cash.turbine.test
 import com.example.minitienda.MainDispatcherRule
 import com.example.minitienda.domain.model.Product
 import com.example.minitienda.domain.repository.ProductRepository
-import com.example.minitienda.presentation.details.DetailUiState
-import com.example.minitienda.presentation.details.DetailViewModel
+import com.example.minitienda.ui.presentation.details.DetailUiState
+import com.example.minitienda.ui.presentation.details.DetailViewModel
+import com.example.minitienda.utils.ERROR_LOAD_PRODUCT
 import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.every
@@ -58,7 +59,7 @@ class DetailViewModelTest {
     @Test
     fun `loadProduct should emit Error when repository throws`() = runTest {
 
-        coEvery { repository.getProductById(1) } throws RuntimeException("Not found")
+        coEvery { repository.getProductById(1) } throws RuntimeException(ERROR_LOAD_PRODUCT)
         every { repository.isFavorite(1) } returns flowOf(false)
 
         val viewModel = DetailViewModel(repository)

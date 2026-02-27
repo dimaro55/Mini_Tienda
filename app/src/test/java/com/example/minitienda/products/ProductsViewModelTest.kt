@@ -3,8 +3,9 @@ package com.example.minitienda.products
 import com.example.minitienda.MainDispatcherRule
 import com.example.minitienda.domain.model.Product
 import com.example.minitienda.domain.repository.ProductRepository
-import com.example.minitienda.presentation.products.ProductsUiState
-import com.example.minitienda.presentation.products.ProductsViewModel
+import com.example.minitienda.ui.presentation.products.ProductsUiState
+import com.example.minitienda.ui.presentation.products.ProductsViewModel
+import com.example.minitienda.utils.ERROR_LOAD_PRODUCTS
 import io.mockk.coEvery
 import io.mockk.mockk
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -47,7 +48,7 @@ class ProductsViewModelTest {
 
     @Test
     fun `when repository throws exception, uiState should be Error`() = runTest {
-        coEvery { repository.getProducts() } throws RuntimeException("Network error")
+        coEvery { repository.getProducts() } throws RuntimeException(ERROR_LOAD_PRODUCTS)
 
         val viewModel = ProductsViewModel(repository)
 
@@ -56,6 +57,6 @@ class ProductsViewModelTest {
         assert(viewModel.uiState.value is ProductsUiState.Error)
 
         val state = viewModel.uiState.value as ProductsUiState.Error
-        assert(state.message == "Network error")
+        assert(state.message == ERROR_LOAD_PRODUCTS)
     }
 }

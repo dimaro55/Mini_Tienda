@@ -4,7 +4,7 @@ import app.cash.turbine.test
 import com.example.minitienda.MainDispatcherRule
 import com.example.minitienda.domain.model.Product
 import com.example.minitienda.domain.repository.ProductRepository
-import com.example.minitienda.presentation.favorites.FavoritesViewModel
+import com.example.minitienda.ui.presentation.favorites.FavoritesViewModel
 import io.mockk.every
 import io.mockk.mockk
 import kotlinx.coroutines.ExperimentalCoroutinesApi
